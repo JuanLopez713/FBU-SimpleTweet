@@ -19,11 +19,12 @@ The following **required** functionality is completed:
   * [x] Newly created tweet should be manually inserted into the timeline and not rely on a full refresh
 * [x] User can **see a counter with total number of characters left for tweet** on compose tweet page
 * [x] User can **pull down to refresh tweets timeline**
-* [ ] User can **see embedded image media within a tweet** on list or detail view.
+* [x] User can **see embedded image media within a tweet** on list view.
+
 
 The following **stretch** features are implemented:
 
-* [ ] User is using **"Twitter branded" colors and styles**
+* [x] User is using **"Twitter branded" colors and styles**
 * [ ] User sees an **indeterminate progress indicator** when any background or network task is happening
 * [ ] User can **select "reply" from home timeline to respond to a tweet**
   * [ ] User that wrote the original tweet is **automatically "@" replied in compose**
