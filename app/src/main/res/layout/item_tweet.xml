@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
 
     <ImageView
         android:id="@+id/ivProfileImage"
@@ -25,6 +26,8 @@
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="TextView"
+        android:textColor="@color/dark_gray"
+        android:textStyle="bold"
         tools:text="LopezScript" />
 
     <TextView
@@ -35,5 +38,18 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/ivProfileImage"
+        android:textColor="@color/dark_gray"
         tools:text="This is my tweet!" />
+
+    <ImageView
+        android:id="@+id/ivMediaImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivProfileImage"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:maxHeight="300dp"
+        android:visibility="visible"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </RelativeLayout>

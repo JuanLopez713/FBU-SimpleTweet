@@ -88,12 +88,12 @@ public class TimelineActivity extends AppCompatActivity {
                 adapter.clear();
                 // ...the data has come back, add new items to your adapter...
                 JSONArray jsonArray = json.jsonArray;
-                try{
+                try {
                     adapter.addAll(Tweet.fromJsonArray((jsonArray)));
-                } catch(JSONException e){
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
-               // addAll(tweets);
+                // addAll(tweets);
                 // populateHomeTimeline();
                 // Now we call setRefreshing(false) to signal refresh has finished
                 swipeContainer.setRefreshing(false);
@@ -149,6 +149,7 @@ public class TimelineActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 Log.i(TAG, "onSuccess" + json.toString());
                 JSONArray jsonArray = json.jsonArray;
+
                 try {
                     tweets.addAll(Tweet.fromJsonArray(jsonArray));
                     adapter.notifyDataSetChanged();
