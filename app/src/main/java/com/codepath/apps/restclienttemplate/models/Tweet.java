@@ -12,6 +12,7 @@ import java.util.List;
 
 @Parcel
 public class Tweet {
+    private static final String TAG = "Tweet";
     public String body;
     public String createdAt;
     public User user;
@@ -19,6 +20,10 @@ public class Tweet {
     public String mediaUrl;
     public String media;
     public Boolean hasMedia;
+    public Long id;
+    public Boolean favorited;
+    public String tweetID;
+
     //empty constructor needed by the parceler library
     public Tweet() {
     }
@@ -27,11 +32,14 @@ public class Tweet {
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         //Log.i("FULLJSON: ", jsonObject.toString());
         Tweet tweet = new Tweet();
-
+        // Log.d(TAG, "fromJson: " + jsonObject.toString());
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
-        if(jsonObject.has("extended_entities")){
+        tweet.id = jsonObject.getLong("id");
+        tweet.tweetID = jsonObject.getString("id_str");
+        tweet.favorited = jsonObject.getBoolean("favorited");
+        if (jsonObject.has("extended_entities")) {
             tweet.media = jsonObject.getJSONObject("extended_entities").getJSONArray("media").getString(0);
 
             try {
@@ -39,14 +47,14 @@ public class Tweet {
                 tweet.mediaUrl = mediaObject.getString("media_url");
                 tweet.hasMedia = true;
                 Log.i("TWEET", tweet.mediaUrl);
-            }catch (JSONException err){
+            } catch (JSONException err) {
                 Log.d("Error", err.toString());
             }
-        }else{
+        } else {
             tweet.hasMedia = false;
         }
 
-       // Log.i("TWEET", tweet.media.toString());
+        // Log.i("TWEET", tweet.media.toString());
         // if(jsonObject.getString("media_url")!= null) {
         //     tweet.media = jsonObject.getString("media_url");
         // }
@@ -60,5 +68,33 @@ public class Tweet {
 
         }
         return tweets;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Entities getEntities() {
+        return entities;
+    }
+
+    public String getMediaUrl() {
+        return mediaUrl;
+    }
+
+    public String getMedia() {
+        return media;
+    }
+
+    public Boolean getHasMedia() {
+        return hasMedia;
     }
 }

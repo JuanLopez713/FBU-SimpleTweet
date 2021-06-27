@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:foregroundTintMode="multiply">
 
     <ImageView
         android:id="@+id/ivProfileImage"
@@ -35,8 +36,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvScreenName"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
+        android:layout_marginEnd="0dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:textColor="@color/dark_gray"
         tools:text="This is my tweet!" />
@@ -44,12 +47,22 @@
     <ImageView
         android:id="@+id/ivMediaImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivProfileImage"
+        android:layout_height="150dp"
+        android:layout_below="@+id/tvBody"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:maxHeight="300dp"
+        android:layout_marginTop="5dp"
+        android:maxHeight="150dp"
         android:visibility="visible"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <ImageButton
+        android:id="@+id/likeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivMediaImage"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:background="#FFFFFF"
+        android:tint="#5A5A5A"
+        app:srcCompat="@drawable/ic_heart_outline" />
 </RelativeLayout>
