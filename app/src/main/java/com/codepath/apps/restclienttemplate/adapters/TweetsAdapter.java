@@ -82,11 +82,15 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TextView likeCounter;
         TextView retweetCounter;
         TextView timeStamp;
+        TextView tvName;
+        ImageView verifiedMark;
 
         public ViewHolder(@NonNull View itemView, OnTweetListener onTweetListener) {
             super(itemView);
+            // ItemTweetBinding binding = ItemTweetBinding.inflate(context.getLayoutInflater());
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvBody = itemView.findViewById(R.id.tvBody);
+            tvName = itemView.findViewById(R.id.tvName);
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
             ivMediaImage = itemView.findViewById(R.id.ivMediaImage);
             likeButton = itemView.findViewById(R.id.likeBtn);
@@ -94,18 +98,21 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             retweetCounter = itemView.findViewById(R.id.retweetCounter);
             replyButton = itemView.findViewById(R.id.replyBtn);
             timeStamp = itemView.findViewById(R.id.timeStamp);
-//            Bitmap bitmapLike = likeButton.getLikeBitmap();
-//            Bitmap bitmapUnlike = likeButton.getUnlikeBitmap();
-//            likeButton.setLikeIcon(Bitmap);
-            //likeButton.setColorFilter(ContextCompat.getColor(context, R.color.COLOR_YOUR_COLOR), android.graphics.PorterDuff.Mode.MULTIPLY);
-
+            verifiedMark = itemView.findViewById(R.id.verifiedMark);
             this.onTweetListener = onTweetListener;
         }
 
         public void bind(Tweet tweet) {
             twitterClient = TwitterApp.getRestClient(context);
             tvBody.setText(tweet.body);
-            tvScreenName.setText(tweet.user.screenName);
+            tvName.setText(tweet.user.name);
+            if(tweet.user.isVerified){
+                verifiedMark.setVisibility(View.VISIBLE);
+            }else{
+                verifiedMark.setVisibility(View.GONE);
+            }
+            String atUsername = String.format("@%s", tweet.user.screenName);
+            tvScreenName.setText(atUsername);
             timeStamp.setText(tweet.date);
             String totalLikes = String.format("%s Likes", tweet.favorite_count);
             if (tweet.favorite_count > 1 || tweet.favorite_count == 0) {

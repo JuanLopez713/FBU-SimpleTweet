@@ -52,6 +52,7 @@ public class Tweet {
         tweet.favorite_count = jsonObject.getLong("favorite_count");
         tweet.retweet_count = jsonObject.getLong("retweet_count");
         tweet.date = getRelativeTimeAgo(jsonObject.getString("created_at"));
+
        // Log.d(TAG, "fromJson: " + tweet.retweet_count);
         if (jsonObject.has("extended_entities")) {
             tweet.media = jsonObject.getJSONObject("extended_entities").getJSONArray("media").getString(0);

@@ -27,7 +27,9 @@ android {
     lintOptions {
         lintConfig rootProject.file('gradle/lint.xml')
     }
-
+    buildFeatures {
+        viewBinding true
+    }
     buildTypes {
         release {
             minifyEnabled false

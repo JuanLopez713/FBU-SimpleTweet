@@ -176,6 +176,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsAdapter
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             //Get data from the intent (tweet)
+            assert data != null;
             Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
             //Update the recycler view with the new tweet
             //Modify data source or the tweets
