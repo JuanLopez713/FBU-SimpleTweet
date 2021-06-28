@@ -81,6 +81,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TwitterClient twitterClient;
         TextView likeCounter;
         TextView retweetCounter;
+        TextView timeStamp;
 
         public ViewHolder(@NonNull View itemView, OnTweetListener onTweetListener) {
             super(itemView);
@@ -92,6 +93,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             likeCounter = itemView.findViewById(R.id.likeCounter);
             retweetCounter = itemView.findViewById(R.id.retweetCounter);
             replyButton = itemView.findViewById(R.id.replyBtn);
+            timeStamp = itemView.findViewById(R.id.timeStamp);
 //            Bitmap bitmapLike = likeButton.getLikeBitmap();
 //            Bitmap bitmapUnlike = likeButton.getUnlikeBitmap();
 //            likeButton.setLikeIcon(Bitmap);
@@ -104,6 +106,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             twitterClient = TwitterApp.getRestClient(context);
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
+            timeStamp.setText(tweet.date);
             String totalLikes = String.format("%s Likes", tweet.favorite_count);
             if (tweet.favorite_count > 1 || tweet.favorite_count == 0) {
                 likeCounter.setText(totalLikes);

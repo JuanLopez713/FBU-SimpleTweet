@@ -1,6 +1,12 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import android.icu.text.SimpleDateFormat;
+import android.net.ParseException;
+import android.os.Build;
+import android.text.format.DateUtils;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,6 +15,7 @@ import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Parcel
 public class Tweet {
@@ -25,6 +32,8 @@ public class Tweet {
     public String tweetID;
     public Long favorite_count;
     public Long retweet_count;
+    public String date;
+
     //empty constructor needed by the parceler library
     public Tweet() {
     }
@@ -42,6 +51,7 @@ public class Tweet {
         tweet.favorited = jsonObject.getBoolean("favorited");
         tweet.favorite_count = jsonObject.getLong("favorite_count");
         tweet.retweet_count = jsonObject.getLong("retweet_count");
+        tweet.date = getRelativeTimeAgo(jsonObject.getString("created_at"));
        // Log.d(TAG, "fromJson: " + tweet.retweet_count);
         if (jsonObject.has("extended_entities")) {
             tweet.media = jsonObject.getJSONObject("extended_entities").getJSONArray("media").getString(0);
@@ -74,6 +84,23 @@ public class Tweet {
         return tweets;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static String getRelativeTimeAgo(String rawJsonDate) {
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+
+        String relativeDate = "";
+        try {
+            long dateMillis = sf.parse(rawJsonDate).getTime();
+            relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
+                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+        } catch (ParseException | java.text.ParseException e) {
+            e.printStackTrace();
+        }
+
+        return relativeDate;
+    }
 //    public String getBody() {
 //        return body;
 //    }
