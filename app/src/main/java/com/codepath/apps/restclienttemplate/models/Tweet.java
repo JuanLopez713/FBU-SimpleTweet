@@ -23,7 +23,8 @@ public class Tweet {
     public Long id;
     public Boolean favorited;
     public String tweetID;
-
+    public Long favorite_count;
+    public Long retweet_count;
     //empty constructor needed by the parceler library
     public Tweet() {
     }
@@ -32,13 +33,16 @@ public class Tweet {
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         //Log.i("FULLJSON: ", jsonObject.toString());
         Tweet tweet = new Tweet();
-        // Log.d(TAG, "fromJson: " + jsonObject.toString());
+       // Log.d(TAG, "fromJson: " + jsonObject.toString(50));
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         tweet.id = jsonObject.getLong("id");
         tweet.tweetID = jsonObject.getString("id_str");
         tweet.favorited = jsonObject.getBoolean("favorited");
+        tweet.favorite_count = jsonObject.getLong("favorite_count");
+        tweet.retweet_count = jsonObject.getLong("retweet_count");
+       // Log.d(TAG, "fromJson: " + tweet.retweet_count);
         if (jsonObject.has("extended_entities")) {
             tweet.media = jsonObject.getJSONObject("extended_entities").getJSONArray("media").getString(0);
 
@@ -46,7 +50,7 @@ public class Tweet {
                 JSONObject mediaObject = new JSONObject(tweet.media);
                 tweet.mediaUrl = mediaObject.getString("media_url");
                 tweet.hasMedia = true;
-                Log.i("TWEET", tweet.mediaUrl);
+               // Log.i("TWEET", .toString());
             } catch (JSONException err) {
                 Log.d("Error", err.toString());
             }
@@ -70,31 +74,31 @@ public class Tweet {
         return tweets;
     }
 
-    public String getBody() {
-        return body;
-    }
+//    public String getBody() {
+//        return body;
+//    }
 
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Entities getEntities() {
-        return entities;
-    }
-
-    public String getMediaUrl() {
-        return mediaUrl;
-    }
-
-    public String getMedia() {
-        return media;
-    }
-
-    public Boolean getHasMedia() {
-        return hasMedia;
-    }
+//    public String getCreatedAt() {
+//        return createdAt;
+//    }
+//
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public Entities getEntities() {
+//        return entities;
+//    }
+//
+//    public String getMediaUrl() {
+//        return mediaUrl;
+//    }
+//
+//    public String getMedia() {
+//        return media;
+//    }
+//
+//    public Boolean getHasMedia() {
+//        return hasMedia;
+//    }
 }

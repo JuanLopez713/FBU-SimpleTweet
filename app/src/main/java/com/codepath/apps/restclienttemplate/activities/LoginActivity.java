@@ -15,7 +15,7 @@ import com.codepath.apps.restclienttemplate.models.SampleModelDao;
 import com.codepath.oauth.OAuthLoginActionBarActivity;
 
 public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
-
+	private static final String TAG = "LoginActivity";
 	SampleModelDao sampleModelDao;
 	
 	@Override
@@ -28,12 +28,7 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 
 		sampleModelDao = ((TwitterApp) getApplicationContext()).getMyDatabase().sampleModelDao();
 
-		AsyncTask.execute(new Runnable() {
-			@Override
-			public void run() {
-				sampleModelDao.insertModel(sampleModel);
-			}
-		});
+		AsyncTask.execute(() -> sampleModelDao.insertModel(sampleModel));
 	}
 
 
@@ -48,7 +43,7 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 	// i.e Display application "homepage"
 	@Override
 	public void onLoginSuccess() {
-		Log.i("rkprkp","login success");
+		Log.i(TAG,"login success");
 		Intent i = new Intent(this, TimelineActivity.class);
 		startActivity(i);
 		// startActivity(i);

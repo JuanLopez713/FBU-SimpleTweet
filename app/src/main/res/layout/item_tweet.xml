@@ -5,7 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:foregroundTintMode="multiply">
+    android:foregroundTintMode="multiply"
+    android:background="@drawable/borderline">
 
     <ImageView
         android:id="@+id/ivProfileImage"
@@ -38,7 +39,7 @@
         android:layout_below="@+id/tvScreenName"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="0dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:textColor="@color/dark_gray"
@@ -47,13 +48,17 @@
     <ImageView
         android:id="@+id/ivMediaImage"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:layout_below="@+id/tvBody"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
         android:maxHeight="150dp"
         android:visibility="visible"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        />
 
     <ImageButton
         android:id="@+id/likeBtn"
@@ -62,7 +67,43 @@
         android:layout_below="@+id/ivMediaImage"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
-        android:background="#FFFFFF"
+        android:layout_marginEnd="10dp"
+        android:background="#00FFFFFF"
         android:tint="#5A5A5A"
         app:srcCompat="@drawable/ic_heart_outline" />
+
+    <ImageButton
+        android:id="@+id/replyBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivMediaImage"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_toStartOf="@+id/likeBtn"
+        android:background="#00FFFFFF"
+        android:tint="#5A5A5A"
+        app:srcCompat="@drawable/ic_reply" />
+
+    <TextView
+        android:id="@+id/likeCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/likeBtn"
+        android:layout_alignEnd="@+id/likeBtn"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="-10dp"
+        android:text="1000 Likes"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/retweetCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/replyBtn"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/likeCounter"
+        android:text="1000 Retweets"
+        android:textAlignment="center" />
+
 </RelativeLayout>
